@@ -6,12 +6,16 @@ const ctrl = require('./controller')
 const app = express()
 
 
+
 app.use(express.json())
 
+
+
 app.get('/api/inventory', ctrl.getInventory)
-// app.post('/api/jokes', ctrl.keep)
-// app.put('/api/jokes/:id', ctrl.name)
-// app.delete('/api/jokes/:id', ctrl.trash)
+app.post('/api/inventory', ctrl.createItem)
+app.delete('/api/inventory/:id', ctrl.deleteItem)
+
+
 massive(DB_CONNECTION_URI).then(databaseConnection => {
     app.set('db', databaseConnection)
     console.log('Database connected')
